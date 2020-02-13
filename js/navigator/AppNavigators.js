@@ -6,6 +6,7 @@ import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {C1Page} from '../pages/my/C1Page';
+import {NavigationContainer} from '@react-navigation/native';
 // import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const rootCom = 'Init'; //设置根路由，对应RootNavigator中第一个初始化的路由名
@@ -69,7 +70,7 @@ function MyStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName={rootCom}
@@ -91,5 +92,13 @@ export default function MyTabs() {
       <Tab.Screen name="发现" component={DiscoverStackScreen} />
       <Tab.Screen name="我的" component={MyStackScreen} />
     </Tab.Navigator>
+  );
+}
+
+export default function AppNavigators() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   );
 }
