@@ -7,7 +7,7 @@ import {DiscoverPage} from '../pages/discover/DiscoverPage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {C1Page} from '../pages/my/C1Page';
 import {NavigationContainer} from '@react-navigation/native';
-// import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export const rootCom = 'Init'; //设置根路由，对应RootNavigator中第一个初始化的路由名
 
@@ -82,15 +82,31 @@ function MyTabs() {
       <Tab.Screen
         name="首页"
         component={HomeStackScreen}
-        // options={{
-        //   tabBarIcon: ({color, size}) => (
-        //     <MaterialCommunityIcons name="home" color={color} size={size} />
-        //   ),
-        // }}
+        options={{
+          tabBarIcon: () => <AntDesign name="home" size={25} />,
+        }}
       />
-      <Tab.Screen name="应用" component={ApplicationStackScreen} />
-      <Tab.Screen name="发现" component={DiscoverStackScreen} />
-      <Tab.Screen name="我的" component={MyStackScreen} />
+      <Tab.Screen
+        name="应用"
+        component={ApplicationStackScreen}
+        options={{
+          tabBarIcon: () => <AntDesign name="appstore-o" size={25} />,
+        }}
+      />
+      <Tab.Screen
+        name="发现"
+        component={DiscoverStackScreen}
+        options={{
+          tabBarIcon: () => <AntDesign name="eyeo" size={25} />,
+        }}
+      />
+      <Tab.Screen
+        name="我的"
+        component={MyStackScreen}
+        options={{
+          tabBarIcon: () => <AntDesign name="user" size={25} />,
+        }}
+      />
     </Tab.Navigator>
   );
 }
