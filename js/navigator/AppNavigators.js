@@ -4,15 +4,29 @@ import {HomePage} from '../pages/home/HomePage';
 import {ApplicationPage} from '../pages/application/ApplicationPage';
 import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {C1Page} from '../pages/my/C1Page';
+// import {LoginPage} from '../pages/user/login';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {MyTheme} from '../theme/theme';
+// import { WelcomePage } from '../pages/welcome/WelcomePage';
 
 export const rootCom = 'Init'; //设置根路由，对应RootNavigator中第一个初始化的路由名
 
+/* 首页tab的stack */
 const HomeStack = createStackNavigator();
+/* 应用tab的stack */
+const ApplicationStack = createStackNavigator();
+/* 发现tab的stack */
+const DiscoverStack = createStackNavigator();
+/* 我的tab的stack */
+const MyStack = createStackNavigator();
+/* app底部tabs的stack */
+const Tab = createBottomTabNavigator();
+/* 根路由stack */
+const RootStack = createStackNavigator();
+
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
@@ -25,7 +39,6 @@ function HomeStackScreen() {
   );
 }
 
-const ApplicationStack = createStackNavigator();
 function ApplicationStackScreen() {
   return (
     <ApplicationStack.Navigator>
@@ -38,7 +51,6 @@ function ApplicationStackScreen() {
   );
 }
 
-const DiscoverStack = createStackNavigator();
 function DiscoverStackScreen() {
   return (
     <DiscoverStack.Navigator>
@@ -51,7 +63,6 @@ function DiscoverStackScreen() {
   );
 }
 
-const MyStack = createStackNavigator();
 function MyStackScreen() {
   return (
     <MyStack.Navigator>
@@ -60,52 +71,85 @@ function MyStackScreen() {
         component={MyPage}
         options={{headerShown: false}}
       />
+      <MyStack.Screen name="C1" component={C1Page} />
     </MyStack.Navigator>
   );
 }
 
-const Tab = createBottomTabNavigator();
-
-function HomeTabs() {
+function HomeTabs({navigation, route}) {
+  navigation.setOptions({headerTitle: getHeaderTitle(route)});
   return (
     <Tab.Navigator
+      // eslint-disable-next-line no-shadow
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
           let iconName;
           switch (route.name) {
-            case '首页':
+            case 'Home':
               iconName = 'home';
               break;
-            case '应用':
+            case 'Application':
               iconName = 'appstore-o';
               break;
-            case '发现':
+            case 'Discover':
               iconName = 'eyeo';
               break;
-            case '我的':
+            case 'My':
               iconName = 'user';
               break;
           }
           return <AntDesign name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="首页" component={HomeStackScreen} />
-      <Tab.Screen name="应用" component={ApplicationStackScreen} />
-      <Tab.Screen name="发现" component={DiscoverStackScreen} />
-      <Tab.Screen name="我的" component={MyStackScreen} />
+      <Tab.Screen
+        name="Home"
+        options={{tabBarLabel: '首页'}}
+        component={HomeStackScreen}
+      />
+      <Tab.Screen
+        name="Application"
+        options={{tabBarLabel: '应用'}}
+        component={ApplicationStackScreen}
+      />
+      <Tab.Screen
+        name="Discover"
+        options={{tabBarLabel: '发现'}}
+        component={DiscoverStackScreen}
+      />
+      <Tab.Screen
+        name="My"
+        options={{tabBarLabel: '我的'}}
+        component={MyStackScreen}
+      />
     </Tab.Navigator>
   );
 }
-
-const RootStack = createStackNavigator();
 
 export default function AppNavigators() {
   return (
     <NavigationContainer theme={MyTheme}>
       <RootStack.Navigator>
-        <RootStack.Screen name="Home" component={HomeTabs} />
-        <RootStack.Screen name="C1" component={C1Page} />
+        <RootStack.Screen
+          options={{headerShown: false}}
+          name="Home"
+          component={HomeTabs}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
+}
+
+/**
+ * 根据route动态获取对应的title名称
+ */
+function getHeaderTitle(route) {
+  // Access the tab navigator's state using `route.state`
+  const routeName = route.state
+    ? // Get the currently active route name in the tab navigator
+      route.state.routes[route.state.index].name
+    : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
+      // In our case, it's "Feed" as that's the first screen inside the navigator
+      route.params?.screen || '首页';
+
+  return routeName;
 }
