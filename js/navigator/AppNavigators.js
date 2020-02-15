@@ -126,7 +126,6 @@ function HomeTabs({navigation, route}) {
 }
 
 function AppNavigators(props) {
-  console.log(props);
   return (
     <NavigationContainer theme={props.theme}>
       <RootStack.Navigator>
