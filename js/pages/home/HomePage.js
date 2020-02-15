@@ -1,7 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
-export function HomePage({navigation}) {
+import {connect} from 'react-redux';
+import actions from '../../action';
+function HomePage({navigation, onThemeChange}) {
   return (
     <View style={{flex: 1, backgroundColor: 'gray', paddingTop: 30}}>
       <Text style={styles.text}>HOME PAGE</Text>
@@ -9,6 +11,12 @@ export function HomePage({navigation}) {
         title={'go to MyPage'}
         onPress={() => {
           navigation.navigate('My', {name: '动态'});
+        }}
+      />
+      <Button
+        title={'修改主题'}
+        onPress={() => {
+          onThemeChange('red');
         }}
       />
     </View>
@@ -20,3 +28,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+const mapDispatchToProps = dispatch => ({
+  onThemeChange: theme => dispatch(actions.onThemeChange(theme)),
+});
+export default connect(
+  null,
+  mapDispatchToProps,
+)(HomePage);

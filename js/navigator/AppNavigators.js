@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomePage} from '../pages/home/HomePage';
+import HomePage from '../pages/home/HomePage';
 import {ApplicationPage} from '../pages/application/ApplicationPage';
 import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
@@ -9,8 +9,8 @@ import {C1Page} from '../pages/my/C1Page';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {MyTheme} from '../theme/theme';
 // import { WelcomePage } from '../pages/welcome/WelcomePage';
+import {connect} from 'react-redux';
 
 export const rootCom = 'Init'; //设置根路由，对应RootNavigator中第一个初始化的路由名
 
@@ -77,7 +77,7 @@ function MyStackScreen() {
 }
 
 function HomeTabs({navigation, route}) {
-  navigation.setOptions({headerTitle: getHeaderTitle(route)});
+  // navigation.setOptions({headerTitle: getHeaderTitle(route)});
   return (
     <Tab.Navigator
       // eslint-disable-next-line no-shadow
@@ -125,9 +125,10 @@ function HomeTabs({navigation, route}) {
   );
 }
 
-export default function AppNavigators() {
+function AppNavigators(props) {
+  console.log(props);
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={props.theme}>
       <RootStack.Navigator>
         <RootStack.Screen
           options={{headerShown: false}}
@@ -139,17 +140,21 @@ export default function AppNavigators() {
   );
 }
 
+const mapStateToProps = state => ({
+  theme: state.theme,
+});
+export default connect(mapStateToProps)(AppNavigators);
 /**
  * 根据route动态获取对应的title名称
  */
-function getHeaderTitle(route) {
-  // Access the tab navigator's state using `route.state`
-  const routeName = route.state
-    ? // Get the currently active route name in the tab navigator
-      route.state.routes[route.state.index].name
-    : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
-      // In our case, it's "Feed" as that's the first screen inside the navigator
-      route.params?.screen || '首页';
+// function getHeaderTitle(route) {
+//   // Access the tab navigator's state using `route.state`
+//   const routeName = route.state
+//     ? // Get the currently active route name in the tab navigator
+//       route.state.routes[route.state.index].name
+//     : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
+//       // In our case, it's "Feed" as that's the first screen inside the navigator
+//       route.params?.screen || '首页';
 
-  return routeName;
-}
+//   return routeName;
+// }
