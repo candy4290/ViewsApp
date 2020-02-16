@@ -4,7 +4,7 @@ import HomePage from '../pages/home/HomePage';
 import {ApplicationPage} from '../pages/application/ApplicationPage';
 import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
-import {C1Page} from '../pages/my/C1Page';
+import C1Page from '../pages/my/C1Page';
 // import {LoginPage} from '../pages/user/login';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -71,12 +71,12 @@ function MyStackScreen() {
         component={MyPage}
         options={{headerShown: false}}
       />
-      <MyStack.Screen name="C1" component={C1Page} />
     </MyStack.Navigator>
   );
+  // <MyStack.Screen name="C1" component={C1Page} />
 }
 
-function HomeTabs({navigation, route}) {
+function HomeTabs() {
   // navigation.setOptions({headerTitle: getHeaderTitle(route)});
   return (
     <Tab.Navigator
@@ -127,12 +127,19 @@ function HomeTabs({navigation, route}) {
 
 function AppNavigators(props) {
   return (
-    <NavigationContainer theme={props.theme}>
+    <NavigationContainer
+      theme={props.theme}
+      tarbarVisible={props.tarbarVisible}>
       <RootStack.Navigator>
         <RootStack.Screen
           options={{headerShown: false}}
           name="Home"
           component={HomeTabs}
+        />
+        <RootStack.Screen
+          options={{headerShown: false}}
+          name="C1"
+          component={C1Page}
         />
       </RootStack.Navigator>
     </NavigationContainer>
