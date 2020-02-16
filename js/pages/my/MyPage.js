@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import {Button} from 'react-native-elements';
 export function MyPage({route, navigation}) {
   //   const {name} = route.params;
   return (

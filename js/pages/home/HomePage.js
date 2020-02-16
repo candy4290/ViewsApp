@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import actions from '../../action';
+import {Button} from 'react-native-elements';
 function HomePage({navigation, onThemeChange}) {
   return (
     <View style={{flex: 1, backgroundColor: 'gray', paddingTop: 30}}>

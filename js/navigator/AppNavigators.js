@@ -71,9 +71,9 @@ function MyStackScreen() {
         component={MyPage}
         options={{headerShown: false}}
       />
+      <MyStack.Screen name="C1" component={C1Page} />
     </MyStack.Navigator>
   );
-  // <MyStack.Screen name="C1" component={C1Page} />
 }
 
 function HomeTabs() {
@@ -135,11 +135,6 @@ function AppNavigators(props) {
           options={{headerShown: false}}
           name="Home"
           component={HomeTabs}
-        />
-        <RootStack.Screen
-          options={{headerShown: false}}
-          name="C1"
-          component={C1Page}
         />
       </RootStack.Navigator>
     </NavigationContainer>
