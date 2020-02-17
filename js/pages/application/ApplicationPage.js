@@ -22,7 +22,7 @@ export function ApplicationPage({navigation}) {
       <Button
         title={'获取token'}
         onPress={() => {
-          doGet('Access-Token');
+          doGet('Access-Token', (error, value) => console.log(value));
         }}
       />
       <Button

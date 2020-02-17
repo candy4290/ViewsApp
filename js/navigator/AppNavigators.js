@@ -5,7 +5,7 @@ import {ApplicationPage} from '../pages/application/ApplicationPage';
 import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
 import C1Page from '../pages/my/C1Page';
-// import {LoginPage} from '../pages/user/login';
+import {LoginPage} from '../pages/user/login';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -80,7 +80,6 @@ function HomeTabs() {
   // navigation.setOptions({headerTitle: getHeaderTitle(route)});
   return (
     <Tab.Navigator
-      // eslint-disable-next-line no-shadow
       backBehavior={'none'}
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
@@ -132,6 +131,11 @@ function AppNavigators(props) {
       theme={props.theme}
       tarbarVisible={props.tarbarVisible}>
       <RootStack.Navigator>
+        <RootStack.Screen
+          options={{headerShown: false}}
+          name="Login"
+          component={LoginPage}
+        />
         <RootStack.Screen
           options={{headerShown: false}}
           name="Home"

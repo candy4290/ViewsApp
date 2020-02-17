@@ -10,11 +10,8 @@ export async function doSave(key, value) {
 /**
  * 获取key对应的数据
  */
-export async function doGet(key) {
-  AsyncStorage.getItem(key, (error, value) => {
-    console.log(value);
-    error && console.log(error.toString());
-  });
+export async function doGet(key, callback) {
+  AsyncStorage.getItem(key, callback);
 }
 /**
  * 移除key对应的数据
@@ -23,4 +20,10 @@ export async function doRemove(key) {
   AsyncStorage.removeItem(key, error => {
     error && console.log(error.toString());
   });
+}
+/**
+ * 清除所有本地存储
+ */
+export async function clear() {
+  AsyncStorage.clear();
 }
