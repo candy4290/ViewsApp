@@ -81,6 +81,7 @@ function HomeTabs() {
   return (
     <Tab.Navigator
       // eslint-disable-next-line no-shadow
+      backBehavior={'none'}
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
           let iconName;
