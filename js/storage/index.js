@@ -11,7 +11,7 @@ export async function doSave(key, value) {
  * 获取key对应的数据
  */
 export async function doGet(key, callback) {
-  AsyncStorage.getItem(key, callback);
+  await AsyncStorage.getItem(key, callback);
 }
 /**
  * 移除key对应的数据

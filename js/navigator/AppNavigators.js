@@ -5,7 +5,9 @@ import {ApplicationPage} from '../pages/application/ApplicationPage';
 import {MyPage} from '../pages/my/MyPage';
 import {DiscoverPage} from '../pages/discover/DiscoverPage';
 import C1Page from '../pages/my/C1Page';
-import {LoginPage} from '../pages/user/login';
+import LoginPage from '../pages/user/login';
+import {ForgetPswPage} from '../pages/user/forget-psw';
+import {ChangePswPage} from '../pages/user/change-psw';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -14,6 +16,8 @@ import {connect} from 'react-redux';
 
 export const rootCom = 'Init'; //设置根路由，对应RootNavigator中第一个初始化的路由名
 
+/* 除了tab页的其它页面 */
+const ElseStack = createStackNavigator();
 /* 首页tab的stack */
 const HomeStack = createStackNavigator();
 /* 应用tab的stack */
@@ -26,6 +30,28 @@ const MyStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 /* 根路由stack */
 const RootStack = createStackNavigator();
+
+function ElseStackScreen() {
+  return (
+    <ElseStack.Navigator>
+      <ElseStack.Screen
+        options={{headerShown: false}}
+        name="Login"
+        component={LoginPage}
+      />
+      <ElseStack.Screen
+        name="FogetPsw"
+        component={ForgetPswPage}
+        options={{headerShown: false}}
+      />
+      <ElseStack.Screen
+        name="ChangePsw"
+        component={ChangePswPage}
+        options={{headerShown: false}}
+      />
+    </ElseStack.Navigator>
+  );
+}
 
 function HomeStackScreen() {
   return (
@@ -125,22 +151,24 @@ function HomeTabs() {
   );
 }
 
-function AppNavigators(props) {
+function AppNavigators({theme, isLogged}) {
+  console.log(isLogged);
   return (
-    <NavigationContainer
-      theme={props.theme}
-      tarbarVisible={props.tarbarVisible}>
+    <NavigationContainer theme={theme}>
       <RootStack.Navigator>
-        <RootStack.Screen
-          options={{headerShown: false}}
-          name="Login"
-          component={LoginPage}
-        />
-        <RootStack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={HomeTabs}
-        />
+        {!isLogged ? (
+          <RootStack.Screen
+            options={{headerShown: false}}
+            name="Else"
+            component={ElseStackScreen}
+          />
+        ) : (
+          <RootStack.Screen
+            options={{headerShown: false}}
+            name="Home"
+            component={HomeTabs}
+          />
+        )}
       </RootStack.Navigator>
     </NavigationContainer>
   );
@@ -148,6 +176,7 @@ function AppNavigators(props) {
 
 const mapStateToProps = state => ({
   theme: state.theme,
+  isLogged: state.isLogged,
 });
 export default connect(mapStateToProps)(AppNavigators);
 /**

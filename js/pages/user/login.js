@@ -13,13 +13,17 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import {height} from '../../utils/device';
 // import axios from '../../axios';
 import {doSave, doRemove, doGet} from '../../storage';
-export function LoginPage({navigation}) {
+import {connect} from 'react-redux';
+import actions from '../../action';
+
+function LoginPage({navigation, onLoggedChange}) {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
-    console.log('componentDidMount: 组件加载后');
+    console.log('componentDidMount: 组件加载后组件加载');
+    // navigation.setOptions({headerShown: false});
     getUserNameAndPassword();
     return () => {
       console.log('componentWillUnmount: 组件卸载， 做一些清理工作');
@@ -40,10 +44,7 @@ export function LoginPage({navigation}) {
     //   });
     // 模拟登录成功
     saveUserNameAndPassword();
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Home'}],
-    });
+    onLoggedChange(true);
   }
 
   function doChecked() {
@@ -64,6 +65,7 @@ export function LoginPage({navigation}) {
 
   function forgetPassword() {
     console.log('忘记密码');
+    navigation.navigate('FogetPsw');
   }
   /**
    * 登录成功后如果记住密码将用户名密码保存至本地
@@ -197,3 +199,10 @@ const loginStyle = StyleSheet.create({
     marginRight: 10,
   },
 });
+const mapDispatchToProps = dispatch => ({
+  onLoggedChange: isLogged => dispatch(actions.onLoggedChange(isLogged)),
+});
+export default connect(
+  null,
+  mapDispatchToProps,
+)(LoginPage);
