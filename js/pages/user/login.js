@@ -21,6 +21,7 @@ function LoginPage({navigation, onLoggedChange}) {
   const [password, setPassword] = useState(null);
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   useEffect(() => {
     console.log('componentDidMount: 组件加载后组件加载');
     // navigation.setOptions({headerShown: false});
@@ -100,6 +101,14 @@ function LoginPage({navigation, onLoggedChange}) {
     });
   }
 
+  function changeFoused() {
+    setIsFocused(true);
+  }
+
+  function changeNotFoused() {
+    setIsFocused(false);
+  }
+
   return (
     <ImageBackground
       source={require('../../../assets/imgs/login/timg.jpeg')}
@@ -125,13 +134,17 @@ function LoginPage({navigation, onLoggedChange}) {
               secureTextEntry={!showPassword}
               value={password}
               placeholder="请输入密码"
+              onFocus={changeFoused}
+              onBlur={changeNotFoused}
               leftIcon={<Icon name="lock" size={24} color="white" />}
               leftIconContainerStyle={{
                 marginLeft: 0,
                 marginRight: 10,
               }}
               rightIcon={
-                showPassword ? (
+                !isFocused ? (
+                  <></>
+                ) : showPassword ? (
                   <TouchableOpacity onPress={doShowPassword}>
                     <FeatherIcon name="eye" size={24} color="white" />
                   </TouchableOpacity>
