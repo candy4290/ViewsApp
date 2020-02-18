@@ -15,7 +15,8 @@ import {height} from '../../utils/device';
 import {doSave, doRemove, doGet} from '../../storage';
 import {connect} from 'react-redux';
 import actions from '../../action';
-
+import LinearGradient from 'react-native-linear-gradient';
+import SelfButton from '../../components/SelfButton';
 function LoginPage({navigation, onLoggedChange}) {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
@@ -110,33 +111,36 @@ function LoginPage({navigation, onLoggedChange}) {
   }
 
   return (
-    <ImageBackground
-      source={require('../../../assets/imgs/login/timg.jpeg')}
+    <LinearGradient
+      colors={['#8AB3D2', '#5B7DAE']}
       style={loginStyle.backgroundImage}>
       <StatusBar barStyle="light-content" />
       <View style={loginStyle.loginPage}>
-        <View style={{width: '90%'}}>
+        <View style={loginStyle.loginContainer}>
           <View>
             <Input
               value={userName}
               placeholder="请输入用户名"
-              leftIcon={<Icon name="user" size={24} color="white" />}
+              leftIcon={
+                <Icon name="user" size={24} color="rgba(101,104,134,0.9)" />
+              }
               leftIconContainerStyle={{marginLeft: 0, marginRight: 10}}
-              inputStyle={{color: 'white'}}
-              placeholderTextColor="white"
+              inputStyle={{color: '#000'}}
+              placeholderTextColor="#B9BBDA"
               onChangeText={changeUserName}
               // errorMessage="invalid"
               // errorStyle={{ position:'absolute', bottom: -25, left: 25 }}
             />
-          </View>
-          <View style={{marginTop: 20}}>
             <Input
+              containerStyle={{marginTop: 15}}
               secureTextEntry={!showPassword}
               value={password}
               placeholder="请输入密码"
               onFocus={changeFoused}
               onBlur={changeNotFoused}
-              leftIcon={<Icon name="lock" size={24} color="white" />}
+              leftIcon={
+                <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
+              }
               leftIconContainerStyle={{
                 marginLeft: 0,
                 marginRight: 10,
@@ -146,43 +150,57 @@ function LoginPage({navigation, onLoggedChange}) {
                   <></>
                 ) : showPassword ? (
                   <TouchableOpacity onPress={doShowPassword}>
-                    <FeatherIcon name="eye" size={24} color="white" />
+                    <FeatherIcon
+                      name="eye"
+                      size={24}
+                      color="rgba(101,104,134,0.9)"
+                    />
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity onPress={doShowPassword}>
-                    <FeatherIcon name="eye-off" size={24} color="white" />
+                    <FeatherIcon
+                      name="eye-off"
+                      size={24}
+                      color="rgba(101,104,134,0.9)"
+                    />
                   </TouchableOpacity>
                 )
               }
-              inputStyle={{color: 'white'}}
-              placeholderTextColor="white"
+              inputStyle={{color: '#000'}}
+              placeholderTextColor="#B9BBDA"
               onChangeText={changePassword}
             />
-          </View>
-          <View style={loginStyle.operatorContainer}>
-            <CheckBox
-              title="记住密码"
-              checked={checked}
-              containerStyle={{
-                backgroundColor: 'none',
-                borderWidth: 0,
-                paddingLeft: 0,
-              }}
-              textStyle={{color: '#fff'}}
-              onPress={doChecked}
+            <View style={loginStyle.operatorContainer}>
+              <CheckBox
+                title="记住密码"
+                checked={checked}
+                containerStyle={{
+                  backgroundColor: 'none',
+                  borderWidth: 0,
+                  paddingLeft: 0,
+                }}
+                uncheckedColor={'#4994ED'}
+                textStyle={{color: '#4994ED', fontSize: 11}}
+                onPress={doChecked}
+              />
+              <TouchableOpacity onPress={forgetPassword}>
+                <Text style={{color: '#4994ED', fontSize: 11}}>忘记密码?</Text>
+              </TouchableOpacity>
+            </View>
+            <SelfButton
+              title={'立 即 登 录'}
+              colors={['#72A4F6', '#63C0FE']}
+              start={{x: 1, y: 0}}
+              end={{x: 0, y: 0}}
+              onPress={login}
             />
-            <TouchableOpacity onPress={forgetPassword}>
-              <Text style={{color: '#fff'}}>忘记密码?</Text>
-            </TouchableOpacity>
           </View>
-          <Button
-            title="立即登录"
-            onPress={login}
-            buttonStyle={loginStyle.loginButton}
-          />
         </View>
+        <View style={loginStyle.subBottom1} />
+        <View style={loginStyle.subBottom2} />
+        <View style={loginStyle.subBottom3} />
       </View>
-    </ImageBackground>
+    </LinearGradient>
   );
 }
 const loginStyle = StyleSheet.create({
@@ -198,6 +216,37 @@ const loginStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  loginContainer: {
+    width: '80%',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 120,
+    paddingBottom: 40,
+    marginTop: '-10%',
+  },
+  subBottom1: {
+    width: '75%',
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    height: 11,
+    marginTop: -5.5,
+  },
+  subBottom2: {
+    width: '70%',
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    height: 10,
+    marginTop: -5,
+  },
+  subBottom3: {
+    width: '65%',
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    height: 9,
+    marginTop: -4.5,
+  },
   operatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -207,7 +256,7 @@ const loginStyle = StyleSheet.create({
   },
   loginButton: {
     borderRadius: 50,
-    marginTop: 30,
+    marginTop: 20,
     marginLeft: 10,
     marginRight: 10,
   },

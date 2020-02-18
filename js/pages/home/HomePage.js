@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
-import actions from '../../action';
+// import {connect} from 'react-redux';
+// import actions from '../../action';
 import {Button} from 'react-native-elements';
-function HomePage({navigation, onThemeChange}) {
+export default function HomePage({navigation, onThemeChange}) {
   return (
     <View style={{flex: 1, backgroundColor: 'gray', paddingTop: 30}}>
       <Text style={styles.text}>HOME PAGE</Text>
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = dispatch => ({
-  onThemeChange: theme => dispatch(actions.onThemeChange(theme)),
-});
-export default connect(
-  null,
-  mapDispatchToProps,
-)(HomePage);
+// const mapDispatchToProps = dispatch => ({
+//   onThemeChange: theme => dispatch(actions.onThemeChange(theme)),
+// });
+// export default connect(
+//   null,
+//   mapDispatchToProps,
+// )(HomePage);

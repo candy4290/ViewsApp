@@ -7,7 +7,7 @@ import {DiscoverPage} from '../pages/discover/DiscoverPage';
 import C1Page from '../pages/my/C1Page';
 import LoginPage from '../pages/user/login';
 import {ForgetPswPage} from '../pages/user/forget-psw';
-import {ChangePswPage} from '../pages/user/change-psw';
+import ChangePswPage from '../pages/user/change-psw';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
