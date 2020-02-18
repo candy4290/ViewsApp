@@ -1,13 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  ImageBackground,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
-import {Button, Input, CheckBox, Text} from 'react-native-elements';
+import {View, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
+import {Input, CheckBox, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {height} from '../../utils/device';
@@ -25,7 +19,7 @@ function LoginPage({navigation, onLoggedChange}) {
   const [isFocused, setIsFocused] = useState(false);
   useEffect(() => {
     console.log('componentDidMount: 组件加载后组件加载');
-    // navigation.setOptions({headerShown: false});
+    // navigation.setOptions({headerTitle: ''});
     getUserNameAndPassword();
     return () => {
       console.log('componentWillUnmount: 组件卸载， 做一些清理工作');
@@ -49,20 +43,8 @@ function LoginPage({navigation, onLoggedChange}) {
     onLoggedChange(true);
   }
 
-  function doChecked() {
-    setChecked(!checked);
-  }
-
   function doShowPassword() {
     setShowPassword(!showPassword);
-  }
-
-  function changeUserName(text) {
-    setUserName(text);
-  }
-
-  function changePassword(text) {
-    setPassword(text);
   }
 
   function forgetPassword() {
@@ -102,14 +84,6 @@ function LoginPage({navigation, onLoggedChange}) {
     });
   }
 
-  function changeFoused() {
-    setIsFocused(true);
-  }
-
-  function changeNotFoused() {
-    setIsFocused(false);
-  }
-
   return (
     <LinearGradient
       colors={['#8AB3D2', '#5B7DAE']}
@@ -120,14 +94,16 @@ function LoginPage({navigation, onLoggedChange}) {
           <View>
             <Input
               value={userName}
-              placeholder="请输入用户名"
+              placeholder="用户名/手机号"
               leftIcon={
                 <Icon name="user" size={24} color="rgba(101,104,134,0.9)" />
               }
-              leftIconContainerStyle={{marginLeft: 0, marginRight: 10}}
+              leftIconContainerStyle={{marginLeft: 4.5, marginRight: 25.5}}
               inputStyle={{color: '#000'}}
               placeholderTextColor="#B9BBDA"
-              onChangeText={changeUserName}
+              onChangeText={value => {
+                setUserName(value);
+              }}
               // errorMessage="invalid"
               // errorStyle={{ position:'absolute', bottom: -25, left: 25 }}
             />
@@ -135,15 +111,15 @@ function LoginPage({navigation, onLoggedChange}) {
               containerStyle={{marginTop: 15}}
               secureTextEntry={!showPassword}
               value={password}
-              placeholder="请输入密码"
-              onFocus={changeFoused}
-              onBlur={changeNotFoused}
+              placeholder="密码"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               leftIcon={
                 <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
               }
               leftIconContainerStyle={{
-                marginLeft: 0,
-                marginRight: 10,
+                marginLeft: 4.5,
+                marginRight: 25.5,
               }}
               rightIcon={
                 !isFocused ? (
@@ -168,7 +144,9 @@ function LoginPage({navigation, onLoggedChange}) {
               }
               inputStyle={{color: '#000'}}
               placeholderTextColor="#B9BBDA"
-              onChangeText={changePassword}
+              onChangeText={value => {
+                setPassword(value);
+              }}
             />
             <View style={loginStyle.operatorContainer}>
               <CheckBox
@@ -181,7 +159,11 @@ function LoginPage({navigation, onLoggedChange}) {
                 }}
                 uncheckedColor={'#4994ED'}
                 textStyle={{color: '#4994ED', fontSize: 11}}
-                onPress={doChecked}
+                onPress={() => {
+                  setChecked(val => {
+                    return !val;
+                  });
+                }}
               />
               <TouchableOpacity onPress={forgetPassword}>
                 <Text style={{color: '#4994ED', fontSize: 11}}>忘记密码?</Text>
