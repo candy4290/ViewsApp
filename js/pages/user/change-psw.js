@@ -12,8 +12,13 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import SelfButton from '../../components/SelfButton';
 import {connect} from 'react-redux';
 import actions from '../../action';
+import HeaderBack from '../../components/HeaderBack';
 
 function ChangePswPage({navigation, onLoggedChange}) {
+  navigation.setOptions({headerShown: true, headerTitle: '修改密码', headerTitleAlign: 'center',
+  headerLeft: () => {
+    return <HeaderBack navigation={navigation} />
+  }});
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -23,11 +28,10 @@ function ChangePswPage({navigation, onLoggedChange}) {
 
   useEffect(() => {
     console.log('componentDidMount: 组件加载后组件加载');
-    navigation.setOptions({headerShown: true, headerTitle: '修改密码'});
     return () => {
       console.log('componentWillUnmount: 组件卸载， 做一些清理工作');
     };
-  }, [navigation]);
+  }, []);
 
   function changePsw() {
     // 模拟修改成功
@@ -53,7 +57,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
             setIsFocused(false);
           }}
           leftIcon={
-            <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
+            <Icon name="lock" size={20} color="rgba(101,104,134,0.9)" />
           }
           leftIconContainerStyle={{
             marginLeft: 10,
@@ -71,7 +75,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
                 }}>
                 <FeatherIcon
                   name="eye"
-                  size={24}
+                  size={20}
                   color="rgba(101,104,134,0.9)"
                 />
               </TouchableOpacity>
@@ -84,7 +88,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
                 }}>
                 <FeatherIcon
                   name="eye-off"
-                  size={24}
+                  size={20}
                   color="rgba(101,104,134,0.9)"
                 />
               </TouchableOpacity>
@@ -108,7 +112,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
             setIsConfirmFocused(false);
           }}
           leftIcon={
-            <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
+            <Icon name="lock" size={20} color="rgba(101,104,134,0.9)" />
           }
           leftIconContainerStyle={{
             marginLeft: 10,
@@ -126,7 +130,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
                 }}>
                 <FeatherIcon
                   name="eye"
-                  size={24}
+                  size={20}
                   color="rgba(101,104,134,0.9)"
                 />
               </TouchableOpacity>
@@ -139,7 +143,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
                 }}>
                 <FeatherIcon
                   name="eye-off"
-                  size={24}
+                  size={20}
                   color="rgba(101,104,134,0.9)"
                 />
               </TouchableOpacity>

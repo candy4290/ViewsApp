@@ -87,7 +87,7 @@ function LoginPage({navigation, onLoggedChange}) {
     <LinearGradient
       colors={['#8AB3D2', '#5B7DAE']}
       style={loginStyle.backgroundImage}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={'#8AB3D2'} translucent={true} />
       <View style={loginStyle.loginPage}>
         <View style={loginStyle.loginContainer}>
           <View>
@@ -95,7 +95,7 @@ function LoginPage({navigation, onLoggedChange}) {
               value={userName}
               placeholder="用户名/手机号"
               leftIcon={
-                <Icon name="user" size={24} color="rgba(101,104,134,0.9)" />
+                <Icon name="user" size={20} color="rgba(101,104,134,0.9)" />
               }
               leftIconContainerStyle={{marginLeft: 4.5, marginRight: 25.5}}
               inputStyle={{color: '#000'}}
@@ -114,7 +114,7 @@ function LoginPage({navigation, onLoggedChange}) {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               leftIcon={
-                <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
+                <Icon name="lock" size={20} color="rgba(101,104,134,0.9)" />
               }
               leftIconContainerStyle={{
                 marginLeft: 4.5,
@@ -127,7 +127,7 @@ function LoginPage({navigation, onLoggedChange}) {
                   <TouchableOpacity onPress={doShowPassword}>
                     <FeatherIcon
                       name="eye"
-                      size={24}
+                      size={20}
                       color="rgba(101,104,134,0.9)"
                     />
                   </TouchableOpacity>
@@ -135,7 +135,7 @@ function LoginPage({navigation, onLoggedChange}) {
                   <TouchableOpacity onPress={doShowPassword}>
                     <FeatherIcon
                       name="eye-off"
-                      size={24}
+                      size={20}
                       color="rgba(101,104,134,0.9)"
                     />
                   </TouchableOpacity>

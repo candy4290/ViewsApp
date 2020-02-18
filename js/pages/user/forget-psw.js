@@ -9,15 +9,19 @@ import {
 import {Input, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import SelfButton from '../../components/SelfButton';
+import HeaderBack from '../../components/HeaderBack';
 
 export function ForgetPswPage({navigation}) {
+  navigation.setOptions({headerShown: true, headerTitle: '忘记密码', headerTitleAlign: 'center',
+  headerLeft: () => {
+    return <HeaderBack navigation={navigation} />
+  }});
   const [timer, setTimer] = useState(null);
   const [secondCount, setSecondCount] = useState(59);
   const [mobile, setMobile] = useState(null);
   const [code, setCode] = useState(null);
   useEffect(() => {
     console.log('componentDidMount: 组件加载后');
-    navigation.setOptions({headerShown: true, headerTitle: '忘记密码'});
     return () => {
       console.log('componentDidMount: 组件卸载后');
       /* 组件卸载，清除定时器 */
@@ -58,7 +62,7 @@ export function ForgetPswPage({navigation}) {
           containerStyle={{marginTop: 20}}
           placeholder="手机号码"
           leftIcon={
-            <Icon name="mobile1" size={24} color="rgba(101,104,134,0.9)" />
+            <Icon name="mobile1" size={20} color="rgba(101,104,134,0.9)" />
           }
           leftIconContainerStyle={{marginLeft: 10, marginRight: 25}}
           inputStyle={{color: '#000'}}
@@ -74,7 +78,7 @@ export function ForgetPswPage({navigation}) {
           secureTextEntry={true}
           placeholder="验证码"
           leftIcon={
-            <Icon name="lock" size={24} color="rgba(101,104,134,0.9)" />
+            <Icon name="lock" size={20} color="rgba(101,104,134,0.9)" />
           }
           leftIconContainerStyle={{marginLeft: 10, marginRight: 25}}
           rightIcon={
