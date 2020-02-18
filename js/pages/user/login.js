@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
 import {Input, CheckBox, Text} from 'react-native-elements';

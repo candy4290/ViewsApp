@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -28,7 +27,7 @@ function ChangePswPage({navigation, onLoggedChange}) {
     return () => {
       console.log('componentWillUnmount: 组件卸载， 做一些清理工作');
     };
-  }, []);
+  }, [navigation]);
 
   function changePsw() {
     // 模拟修改成功

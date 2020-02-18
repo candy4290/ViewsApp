@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -20,6 +19,7 @@ export function ForgetPswPage({navigation}) {
     console.log('componentDidMount: 组件加载后');
     navigation.setOptions({headerShown: true, headerTitle: '忘记密码'});
     return () => {
+      console.log('componentDidMount: 组件卸载后');
       /* 组件卸载，清除定时器 */
       timer && clearInterval(timer);
     };
