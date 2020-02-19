@@ -1,9 +1,9 @@
 import {Dimensions, StatusBar, Platform, PixelRatio} from 'react-native';
 
 //UI设计图的宽度
-const designWidth = 750;
+const designWidth = 375;
 //UI设计图的高度
-const designHeight = 1334;
+const designHeight = 667;
 
 //手机屏幕的宽度
 export const width = Dimensions.get('window').width;

@@ -1,19 +1,15 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {Button} from 'react-native-elements';
+import {width, unitWidth, unitHeight} from '../../utils/device';
 export function MyPage({route, navigation}) {
+  console.log(width);
   //   const {name} = route.params;
   return (
-    <View style={{flex: 1, backgroundColor: 'gray', paddingTop: 30}}>
-      <Text style={styles.text}>My PAGE</Text>
-      <Button
-        title={'前往子页面'}
-        onPress={() => {
-          navigation.navigate('C1', {name: '动态'});
-        }}
-      />
-    </View>
+    <ImageBackground
+    style={{width: 375 * unitWidth, height: 213.5 * unitHeight}}
+    source={require('../../../assets/imgs/my/myTopBg.png')} />
+
   );
 }
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, StatusBar, TouchableOpacity, Image} from 'react-native';
 import {Input, CheckBox, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -90,7 +90,9 @@ function LoginPage({navigation, onLoggedChange}) {
       <StatusBar backgroundColor={'#8AB3D2'} translucent={true} />
       <View style={loginStyle.loginPage}>
         <View style={loginStyle.loginContainer}>
-          <View>
+          <Image source={require('../../../assets/imgs/login/logo.png')} style={{marginTop: -70, alignSelf: 'center'}} />
+          <Image source={require('../../../assets/imgs/login/DigitalOS.png')} style={{marginTop: -15, alignSelf: 'center'}} />
+          <View style={{marginTop: 10}}>
             <Input
               value={userName}
               placeholder="用户名/手机号"
@@ -203,7 +205,6 @@ const loginStyle = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 30,
     paddingRight: 30,
-    paddingTop: 120,
     paddingBottom: 40,
     marginTop: '-10%',
   },

@@ -3,7 +3,7 @@ import Types from '../../action/types';
 const defaultState = {
   dark: false,
   colors: {
-    primary: '#BB9246',
+    primary: '#55ADFF',
     background: 'rgb(242, 242, 242)',
     card: 'rgb(255, 255, 255)',
     text: 'rgb(28, 28, 30)',
